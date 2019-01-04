@@ -1,2 +1,2 @@
 # KotlinAlgorithmas
-使用kotlin实现十大经典算法
+使用kotlin实现十大经典排序算法
