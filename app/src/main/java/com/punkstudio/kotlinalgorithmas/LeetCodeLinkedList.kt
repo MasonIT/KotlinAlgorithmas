@@ -1,0 +1,46 @@
+package com.punkstudio.kotlinalgorithmas
+
+/**
+ * Date:2020/10/20-2:50 PM
+ * @author Mason
+ */
+
+
+
+//143. 重排链表
+//给定一个单链表 L：L0→L1→…→Ln-1→Ln ，
+//将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…
+//你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+//示例 1:
+//给定链表 1->2->3->4, 重新排列为 1->4->2->3.
+//示例 2:
+//给定链表 1->2->3->4->5, 重新排列为 1->5->2->4->3.
+var li = ListNode(5)
+var v1 = li.`val`
+class ListNode(var `val`: Int) {
+    var next: ListNode? = null
+}
+
+fun reorderList(head: ListNode?) {
+    if (head == null) {
+        return
+    }
+    val list = ArrayList<ListNode>()
+    var node = head
+    while (node != null) {
+        list.add(node)
+        node = node.next
+    }
+    var i = 0
+    var j = list.size - 1
+    while (i < j) {
+        list[i].next = list[j]
+        i++
+        if (i == j) {
+            break
+        }
+        list[j].next = list[i]
+        j--
+    }
+    list[i].next = null
+}
