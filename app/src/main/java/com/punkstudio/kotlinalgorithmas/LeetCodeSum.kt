@@ -1,5 +1,7 @@
 package com.punkstudio.kotlinalgorithmas
 
+import kotlin.math.max
+
 /**
  * Date:2020/10/20-10:28 AM
  * @author Mason
@@ -13,7 +15,8 @@ fun main(args: Array<String>) {
 //    println(twoSum1(nums, target).contentToString())
 //    println(reverse(15342))
 
-    println(isLongPressedName("mason", "mmaasoon"))
+//    println(isLongPressedName("mason", "mmaasoon"))
+    println(partitionLabels("ababcbacadefegdehijhklij"))
 }
 
 //1. 两数之和
@@ -209,4 +212,63 @@ fun isLongPressedName(name: String, typed: String): Boolean {
         }
     }
     return i == name.length
+}
+
+//763. 划分字母区间
+//字符串 S 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一个字母只会出现在其中的一个片段。返回一个表示每个字符串片段的长度的列表。
+//示例 1：
+//输入：S = "ababcbacadefegdehijhklij"
+//输出：[9,7,8]
+//解释：
+//划分结果为 "ababcbaca", "defegde", "hijhklij"。
+//每个字母最多出现在一个片段中。
+//像 "ababcbacdaefegde", "hijhklij" 的划分是错误的，因为划分的片段数较少。
+fun partitionLabels1(s: String): List<Int> {
+    var i = 0
+    val array = arrayListOf<Int>()
+    while(i < s.length) {
+        var index = s.lastIndexOf(s[i]) // 最后一个出现当前字母对下标
+        var str = s.slice(i .. index)
+        var start = 1
+        while (start < str.length) {
+            index = s.lastIndexOf(s[start + i])
+            when {
+                (index - i) < str.length -> {
+                    start ++
+                }
+                s.slice(index until s.length).contains(str[start]) -> {
+                    str = s.slice(i .. s.lastIndexOf(str[start]))
+                }
+                else -> {
+                    start ++
+                }
+            }
+        }
+        i += str.length
+        array.add(str.length)
+    }
+
+    return array
+}
+
+fun partitionLabels(s: String): List<Int> {
+    val last = arrayOfNulls<Int>(26)
+    val length = s.length
+    // 把字符串里每个字母最后出现对位置记录到数组
+    for (i in 0 until length) {
+        last[s[i] - 'a'] = i
+    }
+    val partition = arrayListOf<Int>()
+    var start = 0
+    var end = 0
+    // 查找片段里每个字母的最后一个下标
+    for (i in 0 until length) {
+        end = max(end, last[s[i] - 'a']!!)
+        // 当找到当最后一个下标等于指针走过的字符串当长度
+        if (i == end) {
+            partition.add(end - start + 1)
+            start = end + 1
+        }
+    }
+    return partition
 }

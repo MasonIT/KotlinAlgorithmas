@@ -7,6 +7,13 @@ package com.punkstudio.kotlinalgorithmas
 
 
 
+
+fun main(args: Array<String>) {
+    val node0 = ListNode(0)
+    val node1 = ListNode(0)
+    node0.next = node1
+    println(isPalindrome(node0))
+}
 //143. 重排链表
 //给定一个单链表 L：L0→L1→…→Ln-1→Ln ，
 //将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…
@@ -43,4 +50,37 @@ fun reorderList(head: ListNode?) {
         j--
     }
     list[i].next = null
+}
+
+
+//234. 回文链表
+//请判断一个链表是否为回文链表。
+//示例 1:
+//输入: 1->2
+//输出: false
+//示例 2:
+//输入: 1->2->2->1
+//输出: true
+//进阶：
+//你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+fun isPalindrome(head: ListNode?): Boolean {
+    if (head == null) {
+        return false
+    }
+    val list = ArrayList<ListNode>()
+    var node = head
+    while (node != null) {
+        list.add(node)
+        node = node.next
+    }
+    val len = list.size
+    if (len < 1) {
+        return true
+    }
+    for (i in 0 until len / 2) {
+        if (list[i].`val` != list[len - i - 1].`val`) {
+            return false
+        }
+    }
+    return true
 }
