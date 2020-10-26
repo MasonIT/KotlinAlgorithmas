@@ -1,5 +1,8 @@
 package com.punkstudio.kotlinalgorithmas
 
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.max
 
 /**
@@ -16,7 +19,10 @@ fun main(args: Array<String>) {
 //    println(reverse(15342))
 
 //    println(isLongPressedName("mason", "mmaasoon"))
-    println(partitionLabels("ababcbacadefegdehijhklij"))
+//    println(partitionLabels("ababcbacadefegdehijhklij"))
+    println(videoStitching(arrayOf(intArrayOf(0,2),
+        intArrayOf(4,6), intArrayOf(8,10), intArrayOf(1,9), intArrayOf(1,5), intArrayOf(5,9)), 10))
+    println(smallerNumbersThanCurrent(intArrayOf(6,5,4,8)).contentToString())
 }
 
 //1. 两数之和
@@ -223,6 +229,9 @@ fun isLongPressedName(name: String, typed: String): Boolean {
 //划分结果为 "ababcbaca", "defegde", "hijhklij"。
 //每个字母最多出现在一个片段中。
 //像 "ababcbacdaefegde", "hijhklij" 的划分是错误的，因为划分的片段数较少。
+
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/partition-labels/
 fun partitionLabels1(s: String): List<Int> {
     var i = 0
     val array = arrayListOf<Int>()
@@ -271,4 +280,120 @@ fun partitionLabels(s: String): List<Int> {
         }
     }
     return partition
+}
+
+//1024. 视频拼接
+//你将会获得一系列视频片段，这些片段来自于一项持续时长为 T 秒的体育赛事。这些片段可能有所重叠，也可能长度不一。
+//视频片段 clips[i] 都用区间进行表示：开始于 clips[i][0] 并于 clips[i][1] 结束。我们甚至可以对这些片段自由地再剪辑，例如片段 [0, 7] 可以剪切成 [0, 1] + [1, 3] + [3, 7] 三部分。
+//我们需要将这些片段进行再剪辑，并将剪辑后的内容拼接成覆盖整个运动过程的片段（[0, T]）。返回所需片段的最小数目，如果无法完成该任务，则返回 -1 。
+//示例 1：
+//输入：clips = [[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]], T = 10
+//输出：3
+//解释：
+//我们选中 [0,2], [8,10], [1,9] 这三个片段。
+//然后，按下面的方案重制比赛片段：
+//将 [1,9] 再剪辑为 [1,2] + [2,8] + [8,9] 。
+//现在我们手上有 [0,2] + [2,8] + [8,10]，而这些涵盖了整场比赛 [0, 10]。
+//示例 2：
+//输入：clips = [[0,1],[1,2]], T = 5
+//输出：-1
+//解释：
+//我们无法只用 [0,1] 和 [1,2] 覆盖 [0,5] 的整个过程。
+//示例 3：
+//输入：clips = [[0,1],[6,8],[0,2],[5,6],[0,4],[0,3],[6,7],[1,3],[4,7],[1,4],[2,5],[2,6],[3,4],[4,5],[5,7],[6,9]], T = 9
+//输出：3
+//解释：
+//我们选取片段 [0,4], [4,7] 和 [6,9] 。
+//示例 4：
+//
+//输入：clips = [[0,4],[2,8]], T = 5
+//输出：2
+//解释：
+//注意，你可能录制超过比赛结束时间的视频。
+//提示：
+//1 <= clips.length <= 100
+//0 <= clips[i][0] <= clips[i][1] <= 100
+//0 <= T <= 100
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/video-stitching/
+fun videoStitching(clips: Array<IntArray>, T: Int): Int {
+    val maxn = arrayOfNulls<Int>(T)
+    var last = 0
+    var ret = 0
+    var pre = 0
+    for (clip in clips) {
+        if (clip[0] < T) {
+            maxn[clip[0]] = max(maxn[clip[0]] ?: 0, clip[1]);
+        }
+    }
+    for (i in 0 until T) {
+        last = max(last, maxn[i] ?: 0)
+        if (i == last) {
+            return -1;
+        }
+        if (i == pre) {
+            ret++;
+            pre = last;
+        }
+    }
+    return ret;
+}
+
+//1365. 有多少小于当前数字的数字
+//给你一个数组 nums，对于其中每个元素 nums[i]，请你统计数组中比它小的所有数字的数目。
+//换而言之，对于每个 nums[i] 你必须计算出有效的 j 的数量，其中 j 满足 j != i 且 nums[j] < nums[i] 。
+//以数组形式返回答案。
+//示例 1：
+//输入：nums = [8,1,2,2,3]
+//输出：[4,0,1,1,3]
+//解释：
+//对于 nums[0]=8 存在四个比它小的数字：（1，2，2 和 3）。
+//对于 nums[1]=1 不存在比它小的数字。
+//对于 nums[2]=2 存在一个比它小的数字：（1）。
+//对于 nums[3]=2 存在一个比它小的数字：（1）。
+//对于 nums[4]=3 存在三个比它小的数字：（1，2 和 2）。
+//示例 2：
+//输入：nums = [6,5,4,8]
+//输出：[2,1,0,3]
+//示例 3：
+//输入：nums = [7,7,7,7]
+//输出：[0,0,0,0]
+//提示：
+//2 <= nums.length <= 500
+//0 <= nums[i] <= 100
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/how-many-numbers-are-smaller-than-the-current-number
+fun smallerNumbersThanCurrent(nums: IntArray): IntArray {
+//    val array = Array(nums.size) {0}
+//    for ((index, num) in nums.withIndex()) {
+//        for ((i, n) in nums.withIndex()) {
+//            if (index != i && num > n) {
+//                array[index] ++
+//            }
+//        }
+//    }
+//    return array.toIntArray()
+
+    val n = nums.size
+    val data = Array(n) {Array(2) {0} }
+    // 记录数组的原始坐标及对应的值
+    for (i in 0 until n) {
+        data[i][0] = nums[i]
+        data[i][1] = i
+    }
+    // 讲数组排序
+    Arrays.sort(data) {data1, data2 ->
+        data1[0] - data2[0]
+    }
+    val ret = Array(n) { 0 }
+    var prev = -1;
+    for (i in 0 until n) {
+        // 找到第一个不等于自己（因为已经排过序了，所以相当于找到第一个比自己小的数，记录下标就是此数组元素比自己小的个数）
+        if (prev == -1 || data[i][0] != data[i - 1][0]) {
+            prev = i
+        }
+        // ret的记录要与原始坐标对应
+        ret[data[i][1]] = prev
+    }
+    return ret.toIntArray()
 }
