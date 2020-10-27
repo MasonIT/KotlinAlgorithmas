@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
     println(smallerNumbersThanCurrent(intArrayOf(6,5,4,8)).contentToString())
 }
 
-//1. 两数之和
+// todo 1. 两数之和
 //给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
 //你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
 //示例:
@@ -47,7 +47,7 @@ fun twoSum(nums: IntArray, target: Int): IntArray {
     return intArrayOf(0)
 }
 
-//167. 两数之和 II - 输入有序数组
+// todo 167. 两数之和 II - 输入有序数组
 //给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
 //函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。
 //说明:
@@ -101,15 +101,7 @@ fun twoSum1(nums: IntArray, target: Int): IntArray {
     return intArrayOf(-1, -1)
 }
 
- var ti = TreeNode(5)
- var v = ti.value
-
- class TreeNode(var value: Int) {
-     var left: TreeNode? = null
-     var right: TreeNode? = null
- }
-
-//653. 两数之和 IV - 输入 BST
+// todo 653. 两数之和 IV - 输入 BST
 //给定一个二叉搜索树和一个目标结果，如果 BST 中存在两个元素且它们的和等于给定的目标结果，则返回 true。
 //案例 1:
 //输入:
@@ -144,13 +136,13 @@ fun findTarget(root: TreeNode?, k: Int): Boolean {
 fun find(root: TreeNode?, set: HashSet<Int>, k: Int): Boolean {
     if (root == null)
         return false
-    if (set.contains(k - root.value))
+    if (set.contains(k - root.`val`))
         return true
-    set.add(k - root.value)
+    set.add(k - root.`val`)
     return find(root.left, set, k) || find(root.right, set, k)
 }
 
-//7. 整数反转
+// todo 7. 整数反转
 //给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
 //示例 1:
 //输入: 123
@@ -178,7 +170,7 @@ fun reverse(x: Int): Int {
     return rev
 }
 
-//925. 长按键入
+// todo 925. 长按键入
 //你的朋友正在使用键盘输入他的名字 name。偶尔，在键入字符 c 时，按键可能会被长按，而字符可能被输入 1 次或多次。
 //你将会检查键盘输入的字符 typed。如果它对应的可能是你的朋友的名字（其中一些字符可能被长按），那么就返回 True。
 //示例 1：
@@ -220,7 +212,7 @@ fun isLongPressedName(name: String, typed: String): Boolean {
     return i == name.length
 }
 
-//763. 划分字母区间
+// todo 763. 划分字母区间
 //字符串 S 由小写字母组成。我们要把这个字符串划分为尽可能多的片段，同一个字母只会出现在其中的一个片段。返回一个表示每个字符串片段的长度的列表。
 //示例 1：
 //输入：S = "ababcbacadefegdehijhklij"
@@ -282,7 +274,7 @@ fun partitionLabels(s: String): List<Int> {
     return partition
 }
 
-//1024. 视频拼接
+// todo 1024. 视频拼接
 //你将会获得一系列视频片段，这些片段来自于一项持续时长为 T 秒的体育赛事。这些片段可能有所重叠，也可能长度不一。
 //视频片段 clips[i] 都用区间进行表示：开始于 clips[i][0] 并于 clips[i][1] 结束。我们甚至可以对这些片段自由地再剪辑，例如片段 [0, 7] 可以剪切成 [0, 1] + [1, 3] + [3, 7] 三部分。
 //我们需要将这些片段进行再剪辑，并将剪辑后的内容拼接成覆盖整个运动过程的片段（[0, T]）。返回所需片段的最小数目，如果无法完成该任务，则返回 -1 。
@@ -339,7 +331,7 @@ fun videoStitching(clips: Array<IntArray>, T: Int): Int {
     return ret;
 }
 
-//1365. 有多少小于当前数字的数字
+// todo 1365. 有多少小于当前数字的数字
 //给你一个数组 nums，对于其中每个元素 nums[i]，请你统计数组中比它小的所有数字的数目。
 //换而言之，对于每个 nums[i] 你必须计算出有效的 j 的数量，其中 j 满足 j != i 且 nums[j] < nums[i] 。
 //以数组形式返回答案。
@@ -364,16 +356,6 @@ fun videoStitching(clips: Array<IntArray>, T: Int): Int {
 //来源：力扣（LeetCode）
 //链接：https://leetcode-cn.com/problems/how-many-numbers-are-smaller-than-the-current-number
 fun smallerNumbersThanCurrent(nums: IntArray): IntArray {
-//    val array = Array(nums.size) {0}
-//    for ((index, num) in nums.withIndex()) {
-//        for ((i, n) in nums.withIndex()) {
-//            if (index != i && num > n) {
-//                array[index] ++
-//            }
-//        }
-//    }
-//    return array.toIntArray()
-
     val n = nums.size
     val data = Array(n) {Array(2) {0} }
     // 记录数组的原始坐标及对应的值
