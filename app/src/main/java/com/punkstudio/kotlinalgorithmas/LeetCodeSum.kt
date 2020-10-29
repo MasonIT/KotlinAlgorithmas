@@ -321,12 +321,12 @@ fun videoStitching(clips: Array<IntArray>, T: Int): Int {
     for (i in 0 until T) {
         last = max(last, maxn[i] ?: 0)
         if (i == last) {
-            return -1;
+            return -1
         }
         if (i == pre) {
-            ret++;
-            pre = last;
+            ret++
+            pre = last
         }
     }
-    return ret;
+    return ret
 }
