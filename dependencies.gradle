@@ -1,7 +1,7 @@
 
 ext {
     compile_sdk = 28
-    min_sdk = 21
+    min_sdk = 24
     target_sdk = 28
 
     build_plugins = [
