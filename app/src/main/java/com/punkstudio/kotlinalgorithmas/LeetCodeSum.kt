@@ -1,8 +1,5 @@
 package com.punkstudio.kotlinalgorithmas
 
-import java.util.*
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 import kotlin.math.max
 
 /**
@@ -20,9 +17,11 @@ fun main(args: Array<String>) {
 
 //    println(isLongPressedName("mason", "mmaasoon"))
 //    println(partitionLabels("ababcbacadefegdehijhklij"))
-    println(videoStitching(arrayOf(intArrayOf(0,2),
-        intArrayOf(4,6), intArrayOf(8,10), intArrayOf(1,9), intArrayOf(1,5), intArrayOf(5,9)), 10))
-    println(smallerNumbersThanCurrent(intArrayOf(6,5,4,8)).contentToString())
+//    println(videoStitching(arrayOf(intArrayOf(0,2),
+//        intArrayOf(4,6), intArrayOf(8,10), intArrayOf(1,9), intArrayOf(1,5), intArrayOf(5,9)), 10))
+//    println(smallerNumbersThanCurrent(intArrayOf(6,5,4,8)).contentToString())
+
+    println(getSum(5, 7))
 }
 
 // todo 1. 两数之和
@@ -229,7 +228,7 @@ fun partitionLabels1(s: String): List<Int> {
     val array = arrayListOf<Int>()
     while(i < s.length) {
         var index = s.lastIndexOf(s[i]) // 最后一个出现当前字母对下标
-        var str = s.slice(i .. index)
+        var str = s.slice(i..index)
         var start = 1
         while (start < str.length) {
             index = s.lastIndexOf(s[start + i])
@@ -238,7 +237,7 @@ fun partitionLabels1(s: String): List<Int> {
                     start ++
                 }
                 s.slice(index until s.length).contains(str[start]) -> {
-                    str = s.slice(i .. s.lastIndexOf(str[start]))
+                    str = s.slice(i..s.lastIndexOf(str[start]))
                 }
                 else -> {
                     start ++
@@ -329,4 +328,23 @@ fun videoStitching(clips: Array<IntArray>, T: Int): Int {
         }
     }
     return ret
+}
+
+// todo 371. 两整数之和
+//不使用运算符 + 和 - ​​​​​​​，计算两整数 ​​​​​​​a 、b ​​​​​​​之和。
+//示例 1:
+//输入: a = 1, b = 2
+//输出: 3
+//示例 2:
+//输入: a = -2, b = 3
+//输出: 1
+fun getSum(a: Int, b: Int): Int {
+    var bb = b // 5 : 101
+    var aa = a // 7 : 111
+    while(bb != 0){
+        val temp = aa xor bb // 010
+        bb = (aa and bb) shl 1 //  1010
+        aa = temp // 010
+    }
+    return aa
 }
