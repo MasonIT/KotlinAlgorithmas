@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     node0.next = node1
     println(isPalindrome(node0))
 }
-// todo 143. 重排链表
+// todo 143. 重排链表（中等）
 //给定一个单链表 L：L0→L1→…→Ln-1→Ln ，
 //将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…
 //你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
@@ -49,7 +49,7 @@ fun reorderList(head: ListNode?) {
 }
 
 
-// todo 234. 回文链表
+// todo 234. 回文链表（简单）
 //请判断一个链表是否为回文链表。
 //示例 1:
 //输入: 1->2

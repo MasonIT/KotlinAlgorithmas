@@ -18,7 +18,7 @@ fun main(str: Array<String>) {
         intArrayOf(1,1,0,0))))
 }
 
-// todo 1365. 有多少小于当前数字的数字
+// todo 1365. 有多少小于当前数字的数字（简单）
 //给你一个数组 nums，对于其中每个元素 nums[i]，请你统计数组中比它小的所有数字的数目。
 //换而言之，对于每个 nums[i] 你必须计算出有效的 j 的数量，其中 j 满足 j != i 且 nums[j] < nums[i] 。
 //以数组形式返回答案。
@@ -67,7 +67,7 @@ fun smallerNumbersThanCurrent(nums: IntArray): IntArray {
     return ret.toIntArray()
 }
 
-// todo 1207. 独一无二的出现次数
+// todo 1207. 独一无二的出现次数（简单）
 //给你一个整数数组 arr，请你帮忙统计数组中每个数的出现次数。
 //如果每个数的出现次数都是独一无二的，就返回 true；否则返回 false。
 //示例 1：
@@ -96,7 +96,7 @@ fun uniqueOccurrences(arr: IntArray): Boolean {
     return containerArray.size == set.size
 }
 
-// todo 463. 岛屿的周长
+// todo 463. 岛屿的周长（简单）
 //给定一个包含 0 和 1 的二维网格地图，其中 1 表示陆地 0 表示水域。
 //网格中的格子水平和垂直方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。
 //岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。计算这个岛屿的周长。
@@ -129,7 +129,7 @@ fun islandPerimeter(grid: Array<IntArray>): Int {
     return res
 }
 
-// todo 349. 两个数组的交集
+// todo 349. 两个数组的交集（简单）
 //给定两个数组，编写一个函数来计算它们的交集。
 //示例 1：
 //输入：nums1 = [1,2,2,1], nums2 = [2,2]

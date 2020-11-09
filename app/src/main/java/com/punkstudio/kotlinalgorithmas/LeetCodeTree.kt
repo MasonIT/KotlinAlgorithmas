@@ -27,7 +27,7 @@ fun main(args: Array<String>) {
 //    println(fibonacci(10))
     println(sumNumbersBfs(tree1))
 }
-// todo 144. 二叉树的前序遍历 (递归）
+// todo 144. 二叉树的前序遍历 (递归）（中等）
 //给定一个二叉树，返回它的 前序 遍历。
 // 示例:
 //输入: [1,null,2,3]
@@ -53,7 +53,7 @@ private fun preOrder(root: TreeNode?, list: MutableList<Int>) {
     preOrder(root.right, list)
 }
 
-// todo 1161. 最大层内元素和（递归）
+// todo 1161. 最大层内元素和（递归）（中等）
 //给你一个二叉树的根节点 root。设根节点位于二叉树的第 1 层，而根节点的子节点位于第 2 层，依此类推。
 //请你找出层内元素之和 最大 的那几层（可能只有一层）的层号，并返回其中 最小 的那个。
 //示例 1：
@@ -118,7 +118,7 @@ fun maxLevelSumBFS(root: TreeNode?): Int {
     return if (maxSum < currSum) currIndex else maxIndex
 }
 
-// todo 129. 求根到叶子节点数字之和
+// todo 129. 求根到叶子节点数字之和（中等）
 //给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。
 //例如，从根到叶子节点路径 1->2->3 代表数字 123。
 //计算从根到叶子节点生成的所有数字之和。
