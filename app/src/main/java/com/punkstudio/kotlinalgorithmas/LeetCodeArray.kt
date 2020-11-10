@@ -1,7 +1,6 @@
 package com.punkstudio.kotlinalgorithmas
 
 import java.util.*
-import kotlin.collections.HashMap
 
 /**
  * Date:2020/11/3-9:53 AM
@@ -192,3 +191,43 @@ fun kClosest(points: Array<IntArray>, K: Int): Array<IntArray> {
     return points.copyOfRange(0, K)
 }
 
+// todo 31. 下一个排列（中等）
+//实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+//如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+//必须原地修改，只允许使用额外常数空间。
+//以下是一些例子，输入位于左侧列，其相应输出位于右侧列。
+//1,2,3 → 1,3,2
+//3,2,1 → 1,2,3
+//1,1,5 → 1,5,1
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/next-permutation
+fun nextPermutation(nums: IntArray): Unit {
+    var i = nums.size - 2
+    while (i >= 0 && nums[i] >= nums[i + 1]) {
+        -- i
+    }
+    if (i >= 0) {
+        var j = nums.size - 1
+        while (j >= 0 && nums[i] >= nums[j]) {
+            -- j
+        }
+        swap(nums, i, j)
+    }
+    reverse(nums, i + 1)
+}
+
+private fun swap(nums: IntArray, index1: Int, index2: Int) {
+    val temp = nums[index1]
+    nums[index1] = nums[index2]
+    nums[index2] = temp
+}
+
+private fun reverse(nums: IntArray, start: Int) {
+    var left = start
+    var right = nums.size - 1
+    while (left < right) {
+        swap(nums, left, right)
+        left ++
+        right --
+    }
+}
