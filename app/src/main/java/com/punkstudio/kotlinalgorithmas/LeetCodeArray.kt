@@ -20,10 +20,10 @@ fun main(args: Array<String>) {
 }
 
 // todo 941. 有效的山脉数组（简单）
-//给定一个整数数组 A，如果它是有效的山脉数组就返回 true，否则返回 false。
+//给定一个整数数组A，如果它是有效的山脉数组就返回true，否则返回 false。
 //让我们回顾一下，如果 A 满足下述条件，那么它是一个山脉数组：
 //A.length >= 3
-//在 0 < i < A.length - 1 条件下，存在 i 使得：
+//在0 < i< A.length - 1条件下，存在i使得：
 //A[0] < A[1] < ... A[i-1] < A[i]
 //A[i] > A[i+1] > ... > A[A.length - 1]
 //示例 1：
@@ -56,7 +56,7 @@ fun validMountainArray(A: IntArray): Boolean {
 }
 
 // todo 1299. 将每个元素替换为右侧最大元素（简单）
-//给你一个数组 arr ，请你将每个元素用它右边最大的元素替换，如果是最后一个元素，用 -1 替换。
+//给你一个数组arr，请你将每个元素用它右边最大的元素替换，如果是最后一个元素，用-1 替换。
 //完成所有替换操作后，请你返回这个数组。
 //示例：
 //输入：arr = [17,18,5,4,6,1]
@@ -230,4 +230,59 @@ private fun reverse(nums: IntArray, start: Int) {
         left ++
         right --
     }
+}
+
+// todo 922. 按奇偶排序数组 II（简单）
+//给定一个非负整数数组A， A 中一半整数是奇数，一半整数是偶数。
+//对数组进行排序，以便当A[i] 为奇数时，i也是奇数；当A[i]为偶数时， i 也是偶数。
+//你可以返回任何满足上述条件的数组作为答案。
+//示例：
+//输入：[4,2,5,7]
+//输出：[4,5,2,7]
+//解释：[4,7,2,5]，[2,5,4,7]，[2,7,4,5] 也会被接受。
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/sort-array-by-parity-ii
+fun sortArrayByParityII(A: IntArray): IntArray {
+    val length = A.size
+    val array = Array(length) { 0 }
+    val evenArray = mutableListOf<Int>()
+    val oodArray = mutableListOf<Int>()
+//    for (a in A) {
+//        if (a % 2 == 0) {
+//            evenArray.add(a)
+//        } else {
+//            oodArray.add(a)
+//        }
+//    }
+//
+//    for(i in 0 until length) {
+//        if (i % 2 == 0) {
+//            array[i] = evenArray[i / 2]
+//        } else {
+//            array[i] = oodArray[i / 2]
+//        }
+//    }
+    val array1 = A
+    for ((i, a) in array1.withIndex()) {
+        if (i % 2 == 0) {
+            if (a % 2 != 0) {
+                if (evenArray.isEmpty()) {
+                    oodArray.add(i)
+                } else {
+                    swap(array1, i, evenArray[0])
+                    evenArray.removeAt(0)
+                }
+            }
+        } else {
+            if (a % 2 == 0) {
+                if (oodArray.isEmpty()) {
+                    evenArray.add(i)
+                } else {
+                    swap(array1, i, oodArray[0])
+                    oodArray.removeAt(0)
+                }
+            }
+        }
+    }
+    return array.toIntArray()
 }
