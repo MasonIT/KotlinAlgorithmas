@@ -9,21 +9,26 @@ package com.punkstudio.kotlinalgorithmas
 
 
 fun main(args: Array<String>) {
+
 //    val node0 = ListNode(0)
 //    val node1 = ListNode(0)
 //    node0.next = node1
 //    println(isPalindrome(node0))
-    val node0 = ListNode(1)
-    val node1 = ListNode(2)
-    val node2 = ListNode(3)
-    val node3 = ListNode(4)
-    val node4 = ListNode(5)
-    node0.next = node1
-    node1.next = node2
-    node2.next = node3
-    node3.next = node4
-    node4.next = null
-    println(oddEvenList(node0))
+
+//    val node0 = ListNode(1)
+//    val node1 = ListNode(2)
+//    val node2 = ListNode(3)
+//    val node3 = ListNode(4)
+//    val node4 = ListNode(5)
+//    node0.next = node1
+//    node1.next = node2
+//    node2.next = node3
+//    node3.next = node4
+//    node4.next = null
+//    println(oddEvenList(node0))
+
+    println(Math.round(1.5))
+    Help.test()
 }
 // todo 143. 重排链表（中等）
 //给定一个单链表 L：L0→L1→…→Ln-1→Ln ，

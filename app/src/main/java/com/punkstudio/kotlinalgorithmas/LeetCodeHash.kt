@@ -3,6 +3,7 @@ package com.punkstudio.kotlinalgorithmas
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
+import kotlin.math.max
 
 /**
  * Date:2020/10/28-9:46 AM
@@ -152,4 +153,39 @@ fun intersection(nums1: IntArray, nums2: IntArray): IntArray {
         }
     }
     return set.toIntArray()
+}
+
+// todo 1122. 数组的相对排序
+//给你两个数组，arr1 和arr2，
+//arr2中的元素各不相同
+//arr2 中的每个元素都出现在arr1中
+//对 arr1中的元素进行排序，使 arr1 中项的相对顺序和arr2中的相对顺序相同。未在arr2中出现过的元素需要按照升序放在arr1的末尾。
+//示例：
+//输入：arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6]
+//输出：[2,2,2,1,4,3,3,9,6,7,19]
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/relative-sort-array
+fun relativeSortArray(arr1: IntArray, arr2: IntArray): IntArray {
+    var upper = 0
+    for (i in arr1) {
+        upper = max(upper, i)
+    }
+    val array = Array(upper + 1) { 0 }
+    for (i in arr1) {
+        ++ array[i]
+    }
+    val ans = Array(arr1.size) { 0 }
+    var index = 0
+    for (i in arr2) {
+        for (j in 0 until array[i]) {
+            ans[index++] = i
+        }
+        array[i] = 0
+    }
+    for (i in 0 .. upper) {
+        for (j in 0 until array[i]) {
+            ans[index++] = i
+        }
+    }
+    return ans.toIntArray()
 }
