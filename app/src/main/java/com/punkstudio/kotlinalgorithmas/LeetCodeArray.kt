@@ -9,14 +9,20 @@ import java.util.*
 
 fun main(args: Array<String>) {
 //    println(validMountainArray(intArrayOf(0, 3, 2, 1)))
-    println(
-        insert(
-            arrayOf(
-                intArrayOf(1, 5), intArrayOf(6, 8)
-            ), intArrayOf(0, 9)
-        )
-            .contentToString()
-    )
+//    println(
+//        insert(
+//            arrayOf(
+//                intArrayOf(1, 5), intArrayOf(6, 8)
+//            ), intArrayOf(0, 9)
+//        )
+//            .contentToString()
+//    )
+
+    println(canCompleteCircuit(intArrayOf(
+        3, 3, 4
+    ), intArrayOf(
+        3, 4, 4
+    )))
 }
 
 // todo 941. 有效的山脉数组（简单）
@@ -286,3 +292,55 @@ fun sortArrayByParityII(A: IntArray): IntArray {
     }
     return array.toIntArray()
 }
+
+// todo 134. 加油站
+//在一条环路上有N个加油站，其中第i个加油站有汽油gas[i]升。
+//你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1个加油站需要消耗汽油cost[i]升。你从其中的一个加油站出发，开始时油箱为空。
+//如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。
+//说明:
+//如果题目有解，该答案即为唯一答案。
+//输入数组均为非空数组，且长度相同。
+//输入数组中的元素均为非负数。
+//示例1:
+//输入:
+//gas  = [1,2,3,4,5]
+//cost = [3,4,5,1,2]
+//输出: 3
+//解释:
+//从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油
+//开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油
+//开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油
+//开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油
+//开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油
+//开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。
+//因此，3 可为起始索引。
+//示例 2:
+//输入:
+//gas  = [2,3,4]
+//cost = [3,4,3]
+//输出: -1
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/gas-station
+fun canCompleteCircuit(gas: IntArray, cost: IntArray): Int {
+    val len = gas.size
+    for ((i, v) in gas.withIndex()) {
+        var sum = v
+        var count = 0
+        for (j in 0 until len) {
+            val index = (i + j) % len
+            if (sum - cost[index] < 0) {
+                count = 0
+                break
+            } else {
+                sum = sum - cost[index] + gas[(j + i + 1) % len]
+                ++ count
+            }
+        }
+        if (count == len) {
+            return i
+        }
+    }
+    return -1
+}
+
+
