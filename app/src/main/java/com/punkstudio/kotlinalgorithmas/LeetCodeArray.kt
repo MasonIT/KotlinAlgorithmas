@@ -222,13 +222,13 @@ fun nextPermutation(nums: IntArray): Unit {
     reverse(nums, i + 1)
 }
 
-private fun swap(nums: IntArray, index1: Int, index2: Int) {
+fun swap(nums: IntArray, index1: Int, index2: Int) {
     val temp = nums[index1]
     nums[index1] = nums[index2]
     nums[index2] = temp
 }
 
-private fun reverse(nums: IntArray, start: Int) {
+fun reverse(nums: IntArray, start: Int) {
     var left = start
     var right = nums.size - 1
     while (left < right) {

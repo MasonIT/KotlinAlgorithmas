@@ -1,10 +1,17 @@
 package com.punkstudio.kotlinalgorithmas
 
+import java.util.*
+import kotlin.collections.ArrayList
+
 /**
  * Date:2020/11/17-9:50 上午
  * @author Mason
  */
 
+
+fun main(args: Array<String>) {
+    println(moveZeroes(intArrayOf(0, 1, 0 ,3, 12)))
+}
 // todo 1030. 距离顺序排列矩阵单元格
 //给出 R 行 C 列的矩阵，其中的单元格的整数坐标为 (r, c)，满足 0 <= r < R 且 0 <= c < C。
 //另外，我们在该矩阵中给出了一个坐标为(r0, c0) 的单元格。
@@ -39,4 +46,27 @@ fun allCellsDistOrder(R: Int, C: Int, r0: Int, c0: Int): Array<IntArray> {
     }
     matrixArray.sortBy { (Math.abs(r0 - it[0]) + Math.abs(c0 - it[1])) }
     return matrixArray.toTypedArray()
+}
+
+// todo 283. 移动零
+//给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+//示例:
+//输入: [0,1,0,3,12]
+//输出: [1,3,12,0,0]
+//说明:
+//必须在原数组上操作，不能拷贝额外的数组。
+//尽量减少操作次数。
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/move-zeroes
+fun moveZeroes(nums: IntArray): Unit {
+    var left = 0
+    var right = 0
+    val len = nums.size
+    while (right < len) {
+        if (nums[right] != 0) {
+            swap(nums, left, right)
+            left ++
+        }
+        right ++
+    }
 }
