@@ -10,22 +10,27 @@ import kotlin.math.max
  */
 
 fun main(args: Array<String>) {
-    val tree1 = TreeNode(1)
-    val tree2_1 = TreeNode(1)
-    val tree2_2 = TreeNode(0)
-    val tree3_1 = TreeNode(7)
-    val tree3_2 = TreeNode(-8)
-    val tree3_3 = TreeNode(-7)
-    val tree3_4 = TreeNode(9)
-    tree2_1.left = tree3_1
-    tree2_1.right = tree3_2
-    tree2_2.left = tree3_3
-    tree2_2.right = tree3_4
-    tree1.left = tree2_1
-    tree1.right = tree2_2
+//    val tree1 = TreeNode(1)
+//    val tree2_1 = TreeNode(1)
+//    val tree2_2 = TreeNode(0)
+//    val tree3_1 = TreeNode(7)
+//    val tree3_2 = TreeNode(-8)
+//    val tree3_3 = TreeNode(-7)
+//    val tree3_4 = TreeNode(9)
+//    tree2_1.left = tree3_1
+//    tree2_1.right = tree3_2
+//    tree2_2.left = tree3_3
+//    tree2_2.right = tree3_4
+//    tree1.left = tree2_1
+//    tree1.right = tree2_2
+
 //    println(maxLevelSumDFS(tree1))
+
 //    println(fibonacci(10))
-    println(sumNumbersBfs(tree1))
+
+//    println(sumNumbersBfs(tree1))
+
+    println(sortString("aaaabbbbcccc"))
 }
 // todo 144. 二叉树的前序遍历 (递归）（中等）
 //给定一个二叉树，返回它的前序遍历。
@@ -208,4 +213,112 @@ fun fibonacci(n: Int): Int {
             fibonacci(n - 1) + fibonacci(n - 2)
         }
     }
+}
+
+// todo 222. 完全二叉树的节点个数（中等）
+//给出一个完全二叉树，求出该树的节点个数。
+//说明：
+//完全二叉树的定义如下：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。若最底层为第 h 层，则该层包含 1~2h个节点。
+//示例:
+//输入:
+//    1
+//   / \
+//  2   3
+// / \  /
+//4  5 6
+//输出: 6
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/count-complete-tree-nodes
+fun countNodes(root: TreeNode?): Int {
+    if (root == null) {
+        return count
+    } else {
+        count ++
+    }
+    countNodes(root.left)
+    countNodes(root.right)
+    return count
+}
+
+// todo 1370. 上升下降字符串（简单）
+//给你一个字符串s，请你根据下面的算法重新构造字符串：
+//从 s中选出 最小的字符，将它 接在结果字符串的后面。
+//从 s剩余字符中选出最小的字符，且该字符比上一个添加的字符大，将它 接在结果字符串后面。
+//重复步骤 2 ，直到你没法从 s中选择字符。
+//从 s中选出 最大的字符，将它 接在结果字符串的后面。
+//从 s剩余字符中选出最大的字符，且该字符比上一个添加的字符小，将它 接在结果字符串后面。
+//重复步骤 5，直到你没法从 s中选择字符。
+//重复步骤 1 到 6 ，直到 s中所有字符都已经被选过。
+//在任何一步中，如果最小或者最大字符不止一个，你可以选择其中任意一个，并将其添加到结果字符串。
+//请你返回将s中字符重新排序后的 结果字符串 。
+//示例 1：
+//输入：s = "aaaabbbbcccc"
+//输出："abccbaabccba"
+//解释：第一轮的步骤 1，2，3 后，结果字符串为 result = "abc"
+//第一轮的步骤 4，5，6 后，结果字符串为 result = "abccba"
+//第一轮结束，现在 s = "aabbcc" ，我们再次回到步骤 1
+//第二轮的步骤 1，2，3 后，结果字符串为 result = "abccbaabc"
+//第二轮的步骤 4，5，6 后，结果字符串为 result = "abccbaabccba"
+//示例 2：
+//输入：s = "rat"
+//输出："art"
+//解释：单词 "rat" 在上述算法重排序以后变成 "art"
+//示例 3：
+//输入：s = "leetcode"
+//输出："cdelotee"
+//示例 4：
+//输入：s = "ggggggg"
+//输出："ggggggg"
+//示例 5：
+//输入：s = "spo"
+//输出："ops"
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/increasing-decreasing-string
+fun sortString(s: String): String {
+//    val array = s.toCharArray().sortedArray().toMutableList()
+//    val list = mutableListOf<Char>()
+//    while (array.isNotEmpty()) {
+//        list.add(array.removeAt(0))
+//        var i = 0
+//        while (i < array.size) {
+//            if (list.last() < array[i]) {
+//                list.add(array.removeAt(i))
+//            } else {
+//                i ++
+//            }
+//        }
+//        if (array.isNotEmpty()) list.add(array.removeAt(array.size - 1))
+//        var j = array.size - 1
+//        while (j >= 0) {
+//            if (list.last() > array[j]) {
+//                list.add(array.removeAt(j))
+//            }
+//            j --
+//        }
+//    }
+//
+//    return String(list.toCharArray())
+
+    val array = IntArray(26) { 0 }
+    for (c in s) {
+        array[(c - 'a')] ++
+    }
+    val buffer = StringBuffer()
+    while (buffer.length < s.length) {
+        for (i in 0 until array.size) {
+            if (array[i] > 0) {
+                buffer.append((i + 97).toChar())
+                array[i] --
+            }
+        }
+        var j = 25
+        while (j >= 0) {
+            if (array[j] > 0) {
+                buffer.append((j + 97).toChar())
+                array[j] --
+            }
+            j --
+        }
+    }
+    return buffer.toString()
 }
