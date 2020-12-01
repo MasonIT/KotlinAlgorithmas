@@ -305,7 +305,7 @@ fun sortString(s: String): String {
     }
     val buffer = StringBuffer()
     while (buffer.length < s.length) {
-        for (i in 0 until array.size) {
+        for (i in array.indices) {
             if (array[i] > 0) {
                 buffer.append((i + 97).toChar())
                 array[i] --
