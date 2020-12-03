@@ -154,3 +154,20 @@ fun shellSort() : IntArray {
 fun getArray() : IntArray {
     return intArrayOf(7,24,33,5,42,55,36,26,22,2,46,4,19,50,48)
 }
+
+fun isPrime(n: Int): Boolean {
+    if (n < 2) {
+        return false
+    }
+    if (n == 2 || n == 3) {
+        return true
+    } else {
+        val a = Math.sqrt(n.toDouble()).toInt()
+        for (i in 2 .. a) {
+            if (n % i == 0) {
+                return false
+            }
+        }
+        return true
+    }
+}

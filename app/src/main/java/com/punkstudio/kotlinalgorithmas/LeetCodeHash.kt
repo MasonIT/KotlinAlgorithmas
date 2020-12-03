@@ -155,7 +155,7 @@ fun intersection(nums1: IntArray, nums2: IntArray): IntArray {
     return set.toIntArray()
 }
 
-// todo 1122. 数组的相对排序
+// todo 1122. 数组的相对排序（简单）
 //给你两个数组，arr1 和arr2，
 //arr2中的元素各不相同
 //arr2 中的每个元素都出现在arr1中
@@ -188,4 +188,18 @@ fun relativeSortArray(arr1: IntArray, arr2: IntArray): IntArray {
         }
     }
     return ans.toIntArray()
+}
+
+// todo 204. 计数质数（简单）
+//统计所有小于非负整数 n 的质数的数量。
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/count-primes
+fun countPrimes(n: Int): Int {
+    var count = 0
+    for (i in 0 until n) {
+        if (isPrime(i)) {
+            count ++
+        }
+    }
+    return count
 }
