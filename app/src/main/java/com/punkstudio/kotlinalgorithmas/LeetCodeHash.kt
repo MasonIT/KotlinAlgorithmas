@@ -234,3 +234,38 @@ fun groupAnagrams(strs: Array<String>): List<List<String>> {
 
     return ArrayList(map.values)
 }
+
+
+// todo 290. 单词规律（简单）
+//给定一种规律 pattern和一个字符串str，判断 str 是否遵循相同的规律。
+//这里的遵循指完全匹配，例如，pattern里的每个字母和字符串str中的每个非空单词之间存在着双向连接的对应规律。
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/word-pattern
+fun wordPattern(pattern: String, s: String): Boolean {
+    val patternArray = pattern.toCharArray()
+    val array = s.split(" ").toTypedArray()
+    if (patternArray.size != array.size) {
+        return false
+    }
+    val map = HashMap<Char, MutableList<String>>()
+    for ((i, v) in patternArray.withIndex()) {
+        val list = map.getOrDefault(v, ArrayList())
+        list.add(array[i])
+        map[v] = list
+    }
+    val map1 = HashMap<String, String>()
+    for (s in array) {
+        map1[s] = s
+    }
+    if (map.size != map1.size) {
+        return false
+    }
+
+    for (list in map.values) {
+        val value = list[0]
+        if (list.any { it != value }) {
+            return false
+        }
+    }
+    return true
+}
