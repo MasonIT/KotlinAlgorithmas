@@ -1,6 +1,7 @@
 package com.punkstudio.kotlinalgorithmas
 
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.math.max
 
@@ -10,19 +11,19 @@ import kotlin.math.max
  */
 
 fun main(args: Array<String>) {
-//    val tree1 = TreeNode(1)
-//    val tree2_1 = TreeNode(1)
-//    val tree2_2 = TreeNode(0)
-//    val tree3_1 = TreeNode(7)
-//    val tree3_2 = TreeNode(-8)
-//    val tree3_3 = TreeNode(-7)
-//    val tree3_4 = TreeNode(9)
-//    tree2_1.left = tree3_1
-//    tree2_1.right = tree3_2
-//    tree2_2.left = tree3_3
-//    tree2_2.right = tree3_4
-//    tree1.left = tree2_1
-//    tree1.right = tree2_2
+    val tree1 = TreeNode(1)
+    val tree2_1 = TreeNode(2)
+    val tree2_2 = TreeNode(3)
+    val tree3_1 = TreeNode(4)
+    val tree3_2 = TreeNode(5)
+    val tree3_3 = TreeNode(6)
+    val tree3_4 = TreeNode(7)
+    tree2_1.left = tree3_1
+    tree2_1.right = tree3_2
+    tree2_2.left = tree3_3
+    tree2_2.right = tree3_4
+    tree1.left = tree2_1
+    tree1.right = tree2_2
 
 //    println(maxLevelSumDFS(tree1))
 
@@ -31,6 +32,7 @@ fun main(args: Array<String>) {
 //    println(sumNumbersBfs(tree1))
 
     println(sortString("aaaabbbbcccc"))
+    println(zigzagLevelOrder(tree1).toString())
 }
 // todo 144. 二叉树的前序遍历 (递归）（中等）
 //给定一个二叉树，返回它的前序遍历。
@@ -321,4 +323,37 @@ fun sortString(s: String): String {
         }
     }
     return buffer.toString()
+}
+
+// todo 103. 二叉树的锯齿形层序遍历（中等）
+//给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+fun zigzagLevelOrder(root: TreeNode?): List<List<Int>> {
+    if (root == null) {
+        return ArrayList()
+    }
+    val valueList = mutableListOf<List<Int>>()
+    val nodeQueue = LinkedList<TreeNode>()
+    nodeQueue.offer(root)
+    var isOrderLeft = true
+    while (nodeQueue.isNotEmpty()) {
+        val deque = LinkedList<Int>()
+        val size = nodeQueue.size
+        for (i in 0 until size) {
+            val curNode = nodeQueue.poll()
+            if (isOrderLeft) {
+                deque.offerLast(curNode.`val`)
+            } else {
+                deque.offerFirst(curNode.`val`)
+            }
+            if (curNode.left != null) {
+                nodeQueue.offer(curNode.left)
+            }
+            if (curNode.right != null) {
+                nodeQueue.offer(curNode.right)
+            }
+        }
+        isOrderLeft = !isOrderLeft
+        valueList.add(deque)
+    }
+    return valueList
 }
