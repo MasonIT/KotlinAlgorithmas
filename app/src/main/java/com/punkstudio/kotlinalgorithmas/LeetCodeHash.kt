@@ -297,3 +297,45 @@ fun findTheDifference(s: String, t: String): Char {
 
     return sum.toChar()
 }
+
+// todo 387. 字符串中的第一个唯一字符（简单）
+//给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
+//示例：
+//s = "leetcode"
+//返回 0
+//s = "loveleetcode"
+//返回 2
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/first-unique-character-in-a-string
+fun firstUniqChar(s: String): Int {
+    val countArray = IntArray(26) { 0 }
+    for (c in s) {
+        countArray[c - 'a']++
+    }
+    for ((i, c) in s.withIndex()) {
+        if (countArray[c - 'a'] == 1) {
+            return i
+        }
+    }
+    return -1
+
+//    val map = HashMap<Char, Int>()
+//    for ((i, c) in s.withIndex()) {
+//        if (map.containsKey(c)) {
+//            map[c] = -1
+//        } else {
+//            map[c] = i
+//        }
+//    }
+//    var first = s.length
+//    for (position in map.entries) {
+//        val value = position.value
+//        if (value != -1 && value < first) {
+//            first = value
+//        }
+//    }
+//    if (first == s.length) {
+//        first = -1
+//    }
+//    return first
+}
